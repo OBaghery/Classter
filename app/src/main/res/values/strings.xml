@@ -1,3 +1,4 @@
 <resources>
+    <string name="default_web_client_id">204722145228-q8udk5du9tbg19c2djh0mdkurqdgqges.apps.googleusercontent.com</string>
     <string name="app_name">Classter</string>
 </resources>
