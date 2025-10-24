@@ -34,6 +34,12 @@
         android:inputType="textPassword"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
+        android:layout_marginBottom="16dp" />
+
+    <Spinner
+        android:id="@+id/spinner_role"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="24dp" />
 
     <Button
@@ -42,11 +48,16 @@
         android:layout_height="50dp"
         android:text="Registrarse"
         android:textStyle="bold"
+        android:background="@drawable/button_login_background"
+        android:textColor="@android:color/white"
         android:layout_marginBottom="16dp" />
 
     <Button
         android:id="@+id/back_to_login_button"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Volver al Login" />
+        android:text="Volver al Login"
+        android:background="@drawable/button_google_background"
+        android:textColor="@android:color/white" />
+
 </LinearLayout>

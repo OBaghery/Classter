@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@android:color/white">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mi Perfil"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="24dp" />
+
+    <TextView
+        android:id="@+id/txt_nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre: —"
+        android:layout_marginBottom="8dp"
+        android:textSize="16sp"
+        android:textColor="#444444" />
+
+    <TextView
+        android:id="@+id/txt_correo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Correo: —"
+        android:layout_marginBottom="8dp"
+        android:textSize="16sp"
+        android:textColor="#444444" />
+
+    <TextView
+        android:id="@+id/txt_grado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Grado: —"
+        android:layout_marginBottom="8dp"
+        android:textSize="16sp"
+        android:textColor="#444444" />
+
+    <TextView
+        android:id="@+id/txt_seccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sección: —"
+        android:layout_marginBottom="8dp"
+        android:textSize="16sp"
+        android:textColor="#444444" />
+
+    <TextView
+        android:id="@+id/txt_rol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rol: —"
+        android:layout_marginBottom="8dp"
+        android:textSize="16sp"
+        android:textColor="#444444" />
+
+</LinearLayout>

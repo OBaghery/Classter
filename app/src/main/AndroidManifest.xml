@@ -12,9 +12,38 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Classter">
         <activity
+            android:name=".EstudianteHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NotasHijoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HijosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PerfilActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HorarioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NotasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CursosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EstudianteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ApoderadoActivity"
+            android:exported="false" />
+        <activity
             android:name=".RegisterActivity"
             android:exported="false" />
-
         <activity
             android:name=".MainActivity"
             android:exported="true">
