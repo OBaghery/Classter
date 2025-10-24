@@ -14,17 +14,20 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         auth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -50,15 +53,9 @@ class MainActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, HomeActivity::class.java))
-                        finish()
+                        checkUserRole(auth.currentUser?.uid)
                     } else {
-                        Toast.makeText(
-                            this,
-                            "Error: ${task.exception?.message}",
-                            Toast.LENGTH_LONG
-                        ).show()
+                        Toast.makeText(this, "Error: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                     }
                 }
         }
@@ -72,9 +69,7 @@ class MainActivity : AppCompatActivity() {
                 val credential = GoogleAuthProvider.getCredential(account.idToken, null)
                 auth.signInWithCredential(credential).addOnCompleteListener { authTask ->
                     if (authTask.isSuccessful) {
-                        Toast.makeText(this, "Inicio con Google exitoso", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, HomeActivity::class.java))
-                        finish()
+                        checkUserRole(auth.currentUser?.uid)
                     } else {
                         Toast.makeText(this, "Error al iniciar con Google", Toast.LENGTH_SHORT).show()
                     }
@@ -94,12 +89,39 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun checkUserRole(uid: String?) {
+        if (uid == null) return
+        db.collection("users").document(uid).get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val rol = document.getString("rol")
+                    when (rol) {
+                        "apoderado" -> {
+                            startActivity(Intent(this, HijosActivity::class.java))
+                            finish()
+                        }
+                        "estudiante" -> {
+                            startActivity(Intent(this, EstudianteHomeActivity::class.java))
+                            finish()
+                        }
+                        else -> {
+                            Toast.makeText(this, "Rol desconocido o no asignado", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                } else {
+                    Toast.makeText(this, "Usuario no encontrado en Firestore", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Error al obtener datos del usuario", Toast.LENGTH_SHORT).show()
+            }
+    }
+
     override fun onStart() {
         super.onStart()
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            startActivity(Intent(this, HomeActivity::class.java))
-            finish()
+            checkUserRole(currentUser.uid)
         }
     }
 }
